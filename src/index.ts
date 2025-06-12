@@ -1,4 +1,4 @@
-import express ,{Request, Response} from "express";
+import express from "express";
 import path from "path";
 import cookieParser from 'cookie-parser';
 import ejsLayouts from "express-ejs-layouts";
@@ -19,6 +19,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(ejsLayouts); 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "client")));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
