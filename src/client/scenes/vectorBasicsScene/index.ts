@@ -3,30 +3,43 @@ import renderer from "../../renderer";
 import input from "../../input";
 import VectorVisualizer from "../../utils/vectorVisualizer";
 import Vector2 from "../../utils/vector2";
+import type VecComparrison from "./vecComparrison";
+import ManhattanDistance from "./manhattanDistance";
+import EuclideanDistance from "./euclideanDistance";
+import DotProduct from "./dotProduct";
+import CosineSimilarity from "./cosineSimilarity";
+import Axis from "../../utils/axis";
 
 class VectorBasicsScene extends Scene{
 
-	arrowA!: VectorVisualizer;
-	arrowB!: VectorVisualizer;
+	arrowA: VectorVisualizer = new VectorVisualizer(new Vector2(300,200));
+	arrowB: VectorVisualizer = new VectorVisualizer(new Vector2(200,300));
 	grabbedArrow!: VectorVisualizer|null;
+
+	axis:Axis = new Axis(new Vector2(400,400),100);
 
 	manhattanDistanceButton = document.getElementById("manhattanDist") as HTMLButtonElement;
 	euclideanDistanceButton = document.getElementById("euclideanDist")as HTMLButtonElement;
 	dotProductButton = document.getElementById("dotProd")as HTMLButtonElement;
 	cosineSimilarityButton = document.getElementById("cosSim")as HTMLButtonElement;
 
-	start(): void {
-		this.arrowA = new VectorVisualizer(new Vector2(300,200));
-		this.arrowB = new VectorVisualizer(new Vector2(200,300));
-		renderer.setView(new Vector2(400,400));		
+	vecComparrison: VecComparrison | null = null;
+	manhattanDistance: ManhattanDistance = new ManhattanDistance(this.arrowA,this.arrowB);
+	euclideanDistance: EuclideanDistance = new EuclideanDistance(this.arrowA,this.arrowB);
+	dotProduct: DotProduct = new DotProduct(this.arrowA, this.arrowB);
+	cosineSimilarity: CosineSimilarity = new CosineSimilarity(this.arrowA, this.arrowB);
 
-		this.manhattanDistanceButton?.addEventListener("click", ()=>{ this.displaySimilarity = this.manhattanDistance;});
-		this.euclideanDistanceButton?.addEventListener("click", ()=>{ this.displaySimilarity = this.euclideanDistance;});
-		this.dotProductButton?.addEventListener("click", ()=>{ this.displaySimilarity = this.dotProduct;});
-		this.cosineSimilarityButton?.addEventListener("click", ()=>{ this.displaySimilarity = this.cosineSimilarity;});
+	start(): void {
+		renderer.setView(new Vector2(400,400));		
+		
+		this.manhattanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.manhattanDistance;});
+		this.euclideanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.euclideanDistance;});
+		this.dotProductButton?.addEventListener("click", ()=>{ this.vecComparrison = this.dotProduct;});
+		this.cosineSimilarityButton?.addEventListener("click", ()=>{ this.vecComparrison = this.cosineSimilarity;});
 	}
 
 	update(deltaTime:number): void {
+		renderer.draw(this.axis.draw.bind(this.axis));
 		renderer.draw(this.arrowA.draw.bind(this.arrowA));
 		renderer.draw(this.arrowB.draw.bind(this.arrowB));
 		this.grabArrow();
@@ -35,12 +48,15 @@ class VectorBasicsScene extends Scene{
 			this.grabbedArrow.vector.y = input.mousePosition.y;
 		}
 
-		this.displaySimilarity();
+		if(this.vecComparrison){
+			this.vecComparrison.draw();
+		}
 	}	
 
 
 	grabArrow(){
 		const arrow = this.findColserArrow();
+		if(!input.mousePressed){return;}
 		if(input.mousePosition.subtract(arrow.vector).magnitude()<100){
 			this.grabbedArrow = arrow;	
 		}else{
@@ -56,59 +72,6 @@ class VectorBasicsScene extends Scene{
 	}
 
 
-	displaySimilarity(){}
-
-
-	manhattanDistance(){
-		renderer.draw((ctx:CanvasRenderingContext2D)=>{
-			ctx.beginPath();
-			ctx.strokeStyle = "red";
-			ctx.moveTo(this.arrowA.vector.x,this.arrowA.vector.y);
-			ctx.lineTo(this.arrowA.vector.x,this.arrowB.vector.y);
-			ctx.stroke();
-			ctx.beginPath();
-			ctx.strokeStyle = "blue";
-			ctx.moveTo(this.arrowA.vector.x,this.arrowB.vector.y);
-			ctx.lineTo(this.arrowB.vector.x,this.arrowB.vector.y);
-			ctx.stroke();
-		});
-	}
-
-	euclideanDistance(){
-		renderer.draw((ctx:CanvasRenderingContext2D)=>{
-			ctx.beginPath();
-			ctx.strokeStyle = "red";
-			ctx.moveTo(this.arrowA.vector.x,this.arrowA.vector.y);
-			ctx.lineTo(this.arrowB.vector.x,this.arrowB.vector.y);
-			ctx.stroke();
-		});
-	}
-
-	dotProduct(){
-		renderer.draw((ctx:CanvasRenderingContext2D)=>{
-			ctx.strokeStyle = "red";
-			ctx.beginPath();
-			ctx.arc(0,0,100,this.arrowA.vector.angle(), this.arrowB.vector.angle());
-			ctx.stroke();
-		});
-
-	}
-
-	cosineSimilarity(){
-		const tempArrowA : VectorVisualizer = new VectorVisualizer(this.arrowA.vector.normalized().multiply(100));
-		const tempArrowB : VectorVisualizer = new VectorVisualizer(this.arrowB.vector.normalized().multiply(100));
-		tempArrowA.color = "red";
-		tempArrowB.color = "blue";
-		renderer.draw(tempArrowA.draw.bind(tempArrowA));
-		renderer.draw(tempArrowB.draw.bind(tempArrowB));
-
-		renderer.draw((ctx:CanvasRenderingContext2D)=>{
-			ctx.strokeStyle = "red";
-			ctx.beginPath();
-			ctx.arc(0,0,100,this.arrowA.vector.angle(), this.arrowB.vector.angle());
-			ctx.stroke();
-		});
-	}
 
 }
 const vectorBasicsScene = new VectorBasicsScene();

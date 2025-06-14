@@ -61,6 +61,20 @@ export default class Vector2{
 		return new Vector2(x,y);
 
 	}
+	lerp(end: Vector2, t: number): Vector2 {
+		const newX = this.x + (end.x - this.x) * t;
+		const newY = this.y + (end.y - this.y) * t;
+		return new Vector2(newX, newY);
+	}
 
+	static lerp(start: Vector2, end: Vector2, t: number): Vector2 {
+		const newX = start.x + (end.x - start.x) * t;
+		const newY = start.y + (end.y - start.y) * t;
+		return new Vector2(newX, newY);
+	}
+
+	static dot(a:Vector2, b:Vector2): number{
+		return a.x * b.x + a.y * b.y;
+	}
 
 }

@@ -9,24 +9,29 @@
 		<canvas id="mainCanvas" width = "800" height = "800" ></canvas>
     </div>
     <div class="col-md-7">
-	<div class="card">
-		<div class="card-body">
-		<div class="container border">
-		<div class="row">
-		<div class="col-sm-6 col-md-3 mb-2"> 
-		<button id ="manhattanDist" type="button" class="btn btn-primary w-100">Manhattan Distance</button>
+		<div class="card">
+			<div class="card-body">
+				<div class="container border">
+			<div class="row">
+			<div class="col-sm-6 col-md-3 mb-2"> 
+				<button id ="manhattanDist" type="button" class="btn btn-primary w-100">Manhattan Distance</button>
+			</div>
+			<div class="col-sm-6 col-md-3 mb-2">
+				<button id ="euclideanDist" type="button" class="btn btn-primary w-100">Euclidean Distance</button>
+			</div>
+			<div class="col-sm-6 col-md-3 mb-2">
+				<button id ="dotProd" type="button" class="btn btn-primary w-100">Dot Product</button>
+			</div>
+			<div class="col-sm-6 col-md-3 mb-2">
+				<button id ="cosSim" type="button" class="btn btn-primary w-100">Cosine Similarity</button>
+			</div>
 		</div>
-		<div class="col-sm-6 col-md-3 mb-2">
-		<button id ="euclideanDist" type="button" class="btn btn-primary w-100">Euclidean Distance</button>
-		</div>
-		<div class="col-sm-6 col-md-3 mb-2">
-		<button id ="dotProd" type="button" class="btn btn-primary w-100">Dot Product</button>
-		</div>
-		<div class="col-sm-6 col-md-3 mb-2">
-		<button id ="cosSim" type="button" class="btn btn-primary w-100">Cosine Similarity</button>
+		<div class="card">
+			Manhattan distance is a computationaly cheap way of comparing the difference between vectors.
+			It is basicaly a sum of the differences between the corresponding elements between two vectors.
+			$$x_1 - x_2 + y_1 - y_2 + ... n_1 - n_2$$
 		</div>
 		</div>
-</div>
 		</div>
 	</div>
     </div>
@@ -36,5 +41,7 @@
 
 <script src="/index.min.js"> </script>
 
-
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
