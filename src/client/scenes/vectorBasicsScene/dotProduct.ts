@@ -28,13 +28,24 @@ export default class DotProduct implements VecComparrison{
 			ctx.beginPath();
 			ctx.arc(0,0,Math.abs(value),this.arrowA.vector.angle(), this.arrowB.vector.angle(), anticlockwise);
 			ctx.stroke();
+			this.drawValue(ctx);
 		});
 
 
 	}
 
 	drawValue(ctx: CanvasRenderingContext2D): void {
-	    
+		ctx.font = '30px "Computer Modern Serif"'
+		const angleA = this.arrowA.vector.angle();
+		const angleB = this.arrowB.vector.angle();
+
+		let midAngle = (angleA + angleB) / 2;
+		if (Math.abs(angleA - angleB) > Math.PI) {
+			midAngle += Math.PI;
+		}
+		const midVec = Vector2.angleToVec(midAngle).multiply(100);
+		ctx.fillText((this.calculate()/100).toPrecision(4), midVec.x, midVec.y);
+
 	}
 	calculate(): number {
 		return Vector2.dot(this.arrowA.vector, this.arrowB.vector)/100;

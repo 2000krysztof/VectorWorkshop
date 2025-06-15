@@ -51,8 +51,7 @@ export default class Vector2{
 
 
 	angle():number{
-		const n = this.normalized();
-		return Math.atan2(n.y,n.x);
+		return Math.atan2(this.y,this.x);
 	}
 
 	static angleToVec(angle:number):Vector2{

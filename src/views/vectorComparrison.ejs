@@ -1,1 +1,34 @@
-<h1>dwad</h1>
+<div id="MhDistance" style="display:none">
+	<b>Manhattan Distance</b> is a computationally cheap way to compare vectors.  
+	It is calculated as the sum of the absolute differences between the corresponding elements of two vectors:
+
+	$$|x_1 - x_2| + |y_1 - y_2| + \dots + |n_1 - n_2|$$
+</div>
+
+<div id="EcDistance" style="display:none">
+	<b>Euclidean Distance</b> is a more precise comparison than Manhattan distance, but it is also more computationally expensive.  
+	It measures the straight-line distance between two points in space:
+
+	$$\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2 + \dots + (n_1 - n_2)^2}$$
+</div>
+
+<div id="DotProduct" style="display:none">
+	The <b>Dot Product</b> of two vectors returns the product of their magnitudes and the cosine of the angle between them:
+
+	$$A \cdot B = \|A\| \|B\| \cos(\theta)$$
+
+	This can be expanded to 
+
+	$$A \cdot B = x_1x_2 + y_1y_2 + \dots + n_1n_2$$
+
+	The value can range from $$-\infty | \infty$$.
+</div>
+
+<div id="CosineSimilarity" style="display:none">
+	<b>Cosine Similarity</b> is a normalized form of the dot product.  
+	It measures the cosine of the angle between two vectors, ignoring their magnitudes:
+
+	$$\cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$$
+
+	The result ranges from -1 (opposite direction) to 1 (same direction).
+</div>

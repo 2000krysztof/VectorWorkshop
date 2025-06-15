@@ -23,19 +23,27 @@ class VectorBasicsScene extends Scene{
 	dotProductButton = document.getElementById("dotProd")as HTMLButtonElement;
 	cosineSimilarityButton = document.getElementById("cosSim")as HTMLButtonElement;
 
+	manhattanDistanceText = document.getElementById("MhDistance") as HTMLElement;
+	euclideanDistanceText = document.getElementById("EcDistance")as HTMLElement;
+	dotProductText = document.getElementById("DotProduct")as HTMLElement;
+	cosineSimilarityText = document.getElementById("CosineSimilarity")as HTMLElement;
+
 	vecComparrison: VecComparrison | null = null;
 	manhattanDistance: ManhattanDistance = new ManhattanDistance(this.arrowA,this.arrowB);
 	euclideanDistance: EuclideanDistance = new EuclideanDistance(this.arrowA,this.arrowB);
 	dotProduct: DotProduct = new DotProduct(this.arrowA, this.arrowB);
 	cosineSimilarity: CosineSimilarity = new CosineSimilarity(this.arrowA, this.arrowB);
 
+
+
 	start(): void {
 		renderer.setView(new Vector2(400,400));		
 		
-		this.manhattanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.manhattanDistance;});
-		this.euclideanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.euclideanDistance;});
-		this.dotProductButton?.addEventListener("click", ()=>{ this.vecComparrison = this.dotProduct;});
-		this.cosineSimilarityButton?.addEventListener("click", ()=>{ this.vecComparrison = this.cosineSimilarity;});
+		this.manhattanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.manhattanDistance; this.showTextFrom(this.manhattanDistanceText);});
+		this.euclideanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.euclideanDistance;this.showTextFrom(this.euclideanDistanceText);});
+		this.dotProductButton?.addEventListener("click", ()=>{ this.vecComparrison = this.dotProduct;this.showTextFrom(this.dotProductText);});
+		this.cosineSimilarityButton?.addEventListener("click", ()=>{ this.vecComparrison = this.cosineSimilarity;this.showTextFrom(this.cosineSimilarityText);});
+
 	}
 
 	update(deltaTime:number): void {
@@ -53,6 +61,14 @@ class VectorBasicsScene extends Scene{
 		}
 	}	
 
+
+	showTextFrom(element:HTMLElement){
+		this.manhattanDistanceText.style.display ="none";
+		this.euclideanDistanceText.style.display ="none";
+		this.dotProductText.style.display ="none";
+		this.cosineSimilarityText.style.display ="none";
+		element.style.display="block";
+	}
 
 	grabArrow(){
 		const arrow = this.findColserArrow();
