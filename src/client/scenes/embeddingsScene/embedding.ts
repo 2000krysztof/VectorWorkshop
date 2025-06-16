@@ -1,0 +1,63 @@
+export default class Embedding{
+
+	color:string;	
+	prompt:string;
+	token!:number[];	
+	isVisible:boolean = true;
+
+	constructor(prompt: string){
+		this.prompt = prompt;
+		this.color = "black";
+	}
+
+
+	async tokenize() {
+		const response = await fetch("http://localhost:3000/api/embedding/embed", {
+			method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ prompt: this.prompt })
+		});
+
+		if (!response.ok) {
+			throw new Error(`HTTP error: ${response.status}`);
+		}
+		const blob = await response.blob();
+		const buffer = await blob.arrayBuffer();
+
+		const floatArray = new Float32Array(buffer);
+		this.token = Array.from(floatArray);
+	}
+
+
+	toTableRow(): HTMLTableRowElement {
+		const row = document.createElement("tr");
+
+		const promptCell = document.createElement("td");
+		promptCell.textContent = this.prompt;
+		row.appendChild(promptCell);
+
+		const colorCell = document.createElement("td");
+
+		const colorInput = document.createElement("input");
+		colorInput.type = "color";
+		colorCell.appendChild(colorInput);
+		colorInput.onchange = ()=>{
+			this.color = colorInput.value;
+		}
+		row.appendChild(colorCell);
+
+		
+		const setVisable = document.createElement("input");
+		setVisable.type = "checkbox";
+		setVisable.checked = true;
+		setVisable.onchange= ()=>{
+			this.isVisible = setVisable.checked;
+		}
+
+		row.appendChild(setVisable);
+		return row;
+	}
+
+}
