@@ -34,6 +34,8 @@ class VectorBasicsScene extends Scene{
 	dotProduct: DotProduct = new DotProduct(this.arrowA, this.arrowB);
 	cosineSimilarity: CosineSimilarity = new CosineSimilarity(this.arrowA, this.arrowB);
 
+	textBody: HTMLElement = document.getElementById("vecComparrison")!;
+
 
 
 	start(): void {
@@ -43,7 +45,7 @@ class VectorBasicsScene extends Scene{
 		this.euclideanDistanceButton?.addEventListener("click", ()=>{ this.vecComparrison = this.euclideanDistance;this.showTextFrom(this.euclideanDistanceText);});
 		this.dotProductButton?.addEventListener("click", ()=>{ this.vecComparrison = this.dotProduct;this.showTextFrom(this.dotProductText);});
 		this.cosineSimilarityButton?.addEventListener("click", ()=>{ this.vecComparrison = this.cosineSimilarity;this.showTextFrom(this.cosineSimilarityText);});
-
+		this.textBody.style.display = "block";
 	}
 
 	update(deltaTime:number): void {
@@ -60,6 +62,11 @@ class VectorBasicsScene extends Scene{
 			this.vecComparrison.draw();
 		}
 	}	
+
+	exit(){
+
+		this.textBody.style.display = "none";
+	}
 
 
 	showTextFrom(element:HTMLElement){

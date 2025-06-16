@@ -1,34 +1,61 @@
-<div id="MhDistance" style="display:none">
-	<b>Manhattan Distance</b> is a computationally cheap way to compare vectors.  
-	It is calculated as the sum of the absolute differences between the corresponding elements of two vectors:
+<div class="card">
+	<div class="card-body">
+		<div class="container border">
+			<div class="row">
+				<div class="col-sm-6 col-md-3 mb-2">
+					<button id="manhattanDist" type="button" class="btn btn-primary w-100">Manhattan Distance</button>
+				</div>
+				<div class="col-sm-6 col-md-3 mb-2">
+					<button id="euclideanDist" type="button" class="btn btn-primary w-100">Euclidean Distance</button>
+				</div>
+				<div class="col-sm-6 col-md-3 mb-2">
+					<button id="dotProd" type="button" class="btn btn-primary w-100">Dot Product</button>
+				</div>
+				<div class="col-sm-6 col-md-3 mb-2">
+					<button id="cosSim" type="button" class="btn btn-primary w-100">Cosine Similarity</button>
+				</div>
 
-	$$|x_1 - x_2| + |y_1 - y_2| + \dots + |n_1 - n_2|$$
-</div>
+			</div>
+			<div class="card">
+				<div id="MhDistance" style="display:none">
+					<b>Manhattan Distance</b> is a computationally cheap way to compare vectors.
+					It is calculated as the sum of the absolute differences between the corresponding elements of two
+					vectors:
 
-<div id="EcDistance" style="display:none">
-	<b>Euclidean Distance</b> is a more precise comparison than Manhattan distance, but it is also more computationally expensive.  
-	It measures the straight-line distance between two points in space:
+					$$|x_1 - x_2| + |y_1 - y_2| + \dots + |n_1 - n_2|$$
+				</div>
 
-	$$\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2 + \dots + (n_1 - n_2)^2}$$
-</div>
+				<div id="EcDistance" style="display:none">
+					<b>Euclidean Distance</b> is a more precise comparison than Manhattan distance, but it is also more
+					computationally expensive.
+					It measures the straight-line distance between two points in space:
 
-<div id="DotProduct" style="display:none">
-	The <b>Dot Product</b> of two vectors returns the product of their magnitudes and the cosine of the angle between them:
+					$$\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2 + \dots + (n_1 - n_2)^2}$$
+				</div>
 
-	$$A \cdot B = \|A\| \|B\| \cos(\theta)$$
+				<div id="DotProduct" style="display:none">
+					The <b>Dot Product</b> of two vectors returns the product of their magnitudes and the cosine of the
+					angle between them:
 
-	This can be expanded to 
+					$$A \cdot B = \|A\| \|B\| \cos(\theta)$$
 
-	$$A \cdot B = x_1x_2 + y_1y_2 + \dots + n_1n_2$$
+					This can be expanded to
 
-	The value can range from $$-\infty | \infty$$.
-</div>
+					$$A \cdot B = x_1x_2 + y_1y_2 + \dots + n_1n_2$$
 
-<div id="CosineSimilarity" style="display:none">
-	<b>Cosine Similarity</b> is a normalized form of the dot product.  
-	It measures the cosine of the angle between two vectors, ignoring their magnitudes:
+					The value can range from $$-\infty | \infty$$.
+				</div>
 
-	$$\cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$$
+				<div id="CosineSimilarity" style="display:none">
+					<b>Cosine Similarity</b> is a normalized form of the dot product.
+					It measures the cosine of the angle between two vectors, ignoring their magnitudes:
 
-	The result ranges from -1 (opposite direction) to 1 (same direction).
+					$$\cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$$
+
+					The result ranges from -1 (opposite direction) to 1 (same direction).
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
