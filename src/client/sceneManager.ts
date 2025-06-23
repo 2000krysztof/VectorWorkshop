@@ -49,11 +49,26 @@ class SceneManager{
 			return;
 		}
 		let node = this.sceneList;
+		let i = 0;
 		while(node.next != null){
 			node = node.next;
+			node.index = i;
+			i++;
 		}
 		node.next = new SceneNode(scene);
 		node.next.previous = node;
+	}
+
+	setSceneByIndex(index:number){
+		if(!this.sceneList){return;}
+		if(this.sceneList?.index == index){return;}
+		if(this.sceneList?.index < index){
+			this.setNextScene();
+		}
+
+		if(this.sceneList?.index > index){
+			this.setPreviousScene();
+		}
 	}
 
 	update(deltaTime:number){
@@ -66,11 +81,13 @@ class SceneNode{
 	scene:Scene;
 	next!:SceneNode|null;
 	previous!:SceneNode|null;
+	index!:number;
 
 	constructor(scene:Scene){
 		this.scene = scene;
 		this.next = null;
 		this.previous = null;
+		this.index = 0;
 	}
 
 	setNext(next : SceneNode){

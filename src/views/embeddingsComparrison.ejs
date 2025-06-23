@@ -1,0 +1,76 @@
+<div class="card">
+	<h3>Embedding Comparison<h3>
+	
+	<div class="card">
+		<div class="card-body">
+			<div class="container border">
+				<div class="row">
+					<div class="col-sm-6 col-md-3 mb-2"> 
+						<button id ="embeddingComparrisonOverviewButton" type="button" class="btn btn-primary w-100">Overview</button>
+					</div>
+					<div class="col-sm-6 col-md-6 mb-4">
+						<button id ="embeddingComparrisonPlayGroundButton" type="button" class="btn btn-primary w-300">Embedding Comparison Play Ground</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="embeddingComparrisonOverview" class="card">
+	<p>
+	    In the <b>vector comparison</b> section, we covered how to determine the similarity between two vectors in a simple 2D space. In this section, we extend that same fundamental idea to 
+		<b>higher dimensions</b> While you've seen how the math works with 2D vectors (comparing just X and Y values), we'll now be working with the much larger vectors output by the embedding model. The core mathematical principles remain identical, but instead of just two values (x and y), we are comparing hundreds of values (e.g., 384 for the `all-MiniLM-L6-v2` model) to capture more complex relationships.
+	</p>
+	
+	<p>
+	    Within the <b>playground</b> we will use the <b>dot product</b> as our primary method for vector comparison. A crucial point is that since the vectors produced by the embedding model are
+		<b>normalized</b> (meaning they have a magnitude of 1), their dot product directly gives us the <b>cosine similarity</b> This provides an accurate measure of how semantically similar two embeddings are.
+	</p>
+	
+	<p>
+	    In the <b>playground</b> you will be able to add new words or phrases to a list. You can then use the input field to search for similarity, observing how different prompts affect the ranking of words in your list.
+	    <br><br>
+	    For example, let's take the words:
+	    <ol>
+	        <li>"carrot"</li>
+	        <li>"cabbage"</li>
+	        <li>"python"</li>
+	        <li>"dog"</li>
+	        <li>"javascript"</li>
+	    </ol>
+	    Notice that we have two vegetables ("carrot", "cabbage"), two programming languages ("python", "javascript"), and two animals ("dog", "python"). The word "python" is unique in that it represents both an animal and a programming language.
+	    <br><br>
+    If you add these words to the playground and then search for a term like "animal", you'll likely find "python" ranking higher than the vegetables. However, if you then search for "programming language", "python" will also rank highly, showcasing its dual meaning captured by the embedding. Feel free to explore how other words and phrases compare to one another!
+</p>
+	</div>
+
+	<div id="embeddingComparrisonPlayground" style="display:none" class="card">
+		<div class="container border">
+			<div class="row">
+				<div class="col">
+					<input id="promptInput"></input>	
+				</div>
+				<div class="col">
+					<button id="addPrompt" type="button" class="btn btn-primary w-100">Add</button>
+				</div>
+				<div class="col">
+					<button id="searchButton" class="btn btn-primary w-100">Search</button>
+				</div>
+			</div>
+		</div>
+
+	<table class="table">
+		<thead class="table-light">
+			<tr>
+				<th>Prompt</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody id="embeddingComparrisonTable">
+		</tbody>
+	</table>
+
+	</div>
+	
+
+</div>

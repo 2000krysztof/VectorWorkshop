@@ -4,7 +4,7 @@ import { pipeline } from '@xenova/transformers';
 const router = Router();
 router.post('/embed',  async (req: Request, res: Response) => {
 	const text = req.body.prompt;
-	const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+	const extractor = await pipeline('feature-extraction', 'Xenova/bge-small-en-v1.5');
 
 	const output = await extractor(text, { pooling: 'mean', normalize: true });
 	const floatArray = output.data as number[];

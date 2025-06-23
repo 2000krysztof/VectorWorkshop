@@ -11,7 +11,6 @@ const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname,"/client")));
 app.use(cookieParser());
 
 
@@ -31,6 +30,6 @@ app.set("layout", "layout");
 app.use("/",home);
 app.use("/api/embedding", embedding);
 
-app.listen(port, () => {
+app.listen(port,"0.0.0.0", () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

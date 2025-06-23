@@ -3,6 +3,7 @@ export default class Embedding{
 	color:string;	
 	prompt:string;
 	token!:number[];	
+	tokenReduced!:number[];
 	isVisible:boolean = true;
 
 	constructor(prompt: string){
@@ -12,7 +13,7 @@ export default class Embedding{
 
 
 	async tokenize() {
-		const response = await fetch("http://localhost:3000/api/embedding/embed", {
+		const response = await fetch("/api/embedding/embed", {
 			method: "POST",
 		headers: {
 			"Content-Type": "application/json"
@@ -28,8 +29,20 @@ export default class Embedding{
 
 		const floatArray = new Float32Array(buffer);
 		this.token = Array.from(floatArray);
+		this.reduceSize(5);
 	}
 
+	reduceSize(reductionFactor:number){
+
+		this.tokenReduced = new Array() as number[];
+		for (let i = 0; i< this.token.length; i+=reductionFactor){
+			let sum = 0;
+			for(let j =0;j<reductionFactor;j++){
+				sum+= this.token[i+j];
+			}
+			this.tokenReduced.push(sum/reductionFactor);
+		}
+	}
 
 	toTableRow(): HTMLTableRowElement {
 		const row = document.createElement("tr");

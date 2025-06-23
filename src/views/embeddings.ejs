@@ -1,25 +1,63 @@
 <div class="card">
+<h3>Vector Embeddings</h3>
 	<div class="card-body">
 		<div class="container border">
 			<div class="row">
 				<div class="col-sm-6 col-md-3 mb-2"> 
-					<button id ="embeddingOverview" type="button" class="btn btn-primary w-100">Overview</button>
+					<button id ="embeddingOverviewButton" type="button" class="btn btn-primary w-100">Overview</button>
 				</div>
-				<div class="col-sm-6 col-md-3 mb-2">
-					<button id ="embeddingPlayGround" type="button" class="btn btn-primary w-100">Play Ground</button>
+				<div class="col-sm-6 col-md-6 mb-4">
+					<button id ="embeddingPlayGroundButton" type="button" class="btn btn-primary w-300">Embeddings Graph Play Ground</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="card">
-	<input id = "inputPrompt" class="form-control" ></input>
+
+<div id="embeddingOverview" class="card">
+	<h3>Vector Embeddings</h3>
+	<p>
+		<b>Vector embeddings</b> are a powerful technique for converting complex data, such as linguistic meaning (words, phrases, or entire sentences), into a numerical <b>vector of a fixed size</b>. The magic of embeddings lies in their ability to capture <b>semantic meaning and relationships</b> within these numerical representations. This allows for incredibly efficient <b>contextual search and comparison</b>.
+	<br>
+	Let's consider the following example sentences:
+	<ol>
+		<li>"Man walked to the house"</li>
+		<li>"Dog walked to the house"</li>
+		<li>"Man ran to the house"</li>
+	</ol>
+	When we encode these sentences using an embedding model, the resulting vectors will have a fascinating property: sentences with similar meanings or contexts will produce vectors that are numerically "closer" to each other in the vector space.
+	<br>
+	For instance, Sentence 1 ("Man walked to the house") and Sentence 3 ("Man ran to the house") should produce more similar vectors than Sentence 1 and Sentence 2 ("Dog walked to the house"). Why? Because the core context between Sentence 1 and 3 changes only by one verb ("walked" vs. "ran"), while the context between Sentence 1 and 2 changes the main subject ("Man" vs. "Dog"). Since "ran" and "walked" are semantically more similar actions than "man" and "dog" are similar entities, the embedding model correctly places their vectors closer together.
+
+	</p>
+	<br>
+
+	<p>
+	Go to visit the <b>playground section</b> to explore different sentences and observe firsthand how their embedding vectors compare and differ from one another.
+	</p>
+</div>
+
+<div id="embeddingPlayground" class="card" style="display:none">
+
+	<button id="toggleGraphType" type="button" class="btn btn-primary w-100">Toggle Graph Type</button>
+	<p>
+		Enter a prompt to see how it's embedding looks
+	</p>
+	<div class="row">
+		<div class="col">
+			<input id = "inputPrompt" class="form-control" ></input>
+		</div>
+		<div class="col">
+			<button id="submitEmbeddingButton" type="button" class="btn btn-primary w-100">Submit</button>
+		</div>
+	</div>
 
 	<table class="table">
 		<thead class="table-light">
 			<tr>
 				<th>Prompt</th>
 				<th>Color</th>
+				<th>Show</th>
 			</tr>
 		</thead>
 		<tbody id="embeddingsTable">

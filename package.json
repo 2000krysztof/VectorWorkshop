@@ -5,7 +5,8 @@
   "scripts": {
     "build": "hack/build.sh",
     "dev": "hack/build.sh ; bun run dist/index.ts",
-    "dev-watch": "bun run watcher.ts"
+    "dev-watch": "bun run watcher.ts",
+	"start": "bun run dist/index.ts"
   },
   "private": true,
   "devDependencies": {

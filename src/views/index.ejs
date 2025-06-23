@@ -5,11 +5,16 @@
 
 <div class="container mt-md-4 mt-lg-5 p-3 border">
   <div class="row">
-    <div class="col-md-5">
+    <div id="canvasContainer" class="col-md-5">
 		<canvas id="mainCanvas" width = "800" height = "800" ></canvas>
     </div>
 		
-    <div class="col-md-7">
+    <div id="textContainer" class="col-md-7">
+
+		<div id="introduction" style="display:none"> 
+			<%- include('introduction') -%>	
+		</div>
+
 		<div id="vecComparrison" style="display:none"> 
 			<%- include('vectorComparrison') -%>
 		</div>
@@ -17,6 +22,11 @@
 		<div id="embeddings" style="display:none"> 
 			<%- include('embeddings') -%>	
 		</div>
+
+		<div id="embeddingsComparrison" style="display:none"> 
+			<%- include('embeddingsComparrison') -%>	
+		</div>
+
 		</div>
 		</div>
 		</div>
